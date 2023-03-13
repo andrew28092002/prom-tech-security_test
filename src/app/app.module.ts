@@ -7,11 +7,17 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button'; 
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatInputModule} from '@angular/material/input'; 
-import {MatSelectModule} from '@angular/material/select'; 
+import {MatSelectModule} from '@angular/material/select';
+import { ItemsComponent } from './component/items/items.component';
+import { ItemComponent } from './component/item/item.component';
+import { ModalComponent } from './component/modal/modal.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ItemsComponent,
+    ItemComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
