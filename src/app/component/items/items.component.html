@@ -1,1 +1,30 @@
-<p>items works!</p>
+<div class="container">
+  <div class="header">
+    <div class="title">
+      <h1>Популярные фильмы</h1>
+    </div>
+    <div class="search">
+      <mat-form-field>
+        <mat-label>Choose an option</mat-label>
+        <mat-select>
+          <mat-option value="option1">Option 1</mat-option>
+          <mat-option value="option2">Option 2</mat-option>
+          <mat-option value="option3">Option 3</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Введите название</mat-label>
+        <input matInput type="text" [(ngModel)]="value" />
+        <button
+          *ngIf="value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="value = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </div>
+</div>
