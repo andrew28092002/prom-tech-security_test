@@ -3,21 +3,23 @@ import { TItem } from 'src/assets/types/item';
 import { genre } from 'src/assets/data/genre';
 import { MatIconButton } from '@angular/material/button';
 import { LocalService } from 'src/app/local.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ModelDialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent implements OnInit{
-  @Input('item') item: TItem;
-  @Output('toggleFavoriteButton') click = new EventEmitter();
+export class ItemComponent implements OnInit {
+  @Input() item: TItem;
+  @Output() likeClick = new EventEmitter();
   genre: Map<number, string> = genre;
-  isFavorite: boolean = false
+  isFavorite: boolean = false;
 
-  constructor(private LocalStorage: LocalService) {}
+  constructor(private LocalStorage: LocalService, private dialog: MatDialog) {}
   ngOnInit(): void {
-    this.checkIsFavorite()
+    this.checkIsFavorite();
   }
 
   reverseGenre() {
@@ -33,7 +35,15 @@ export class ItemComponent implements OnInit{
   }
 
   onClick() {
-    this.click.emit(this.item);
+    this.likeClick.emit(this.item);
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(ModelDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 
   checkIsFavorite() {
@@ -42,9 +52,9 @@ export class ItemComponent implements OnInit{
     if (dataFromStorage) {
       const favoriteItems = JSON.parse(dataFromStorage);
 
-      this.isFavorite = favoriteItems.filter(
-        (item: TItem) => item.id === this.item.id
-      ).length > 0;
+      this.isFavorite =
+        favoriteItems.filter((item: TItem) => item.id === this.item.id).length >
+        0;
     }
   }
 }

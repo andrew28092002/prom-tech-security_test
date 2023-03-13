@@ -12,12 +12,20 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog'
 import { ItemsComponent } from './component/items/items.component';
 import { ItemComponent } from './component/item/item.component';
-import { ModalComponent } from './component/modal/modal.component';
+import {
+  ModelDialogComponent,
+} from './component/dialog/dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, ItemsComponent, ItemComponent, ModalComponent],
+  declarations: [
+    AppComponent,
+    ItemsComponent,
+    ItemComponent,
+    ModelDialogComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -28,7 +36,8 @@ import { ModalComponent } from './component/modal/modal.component';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

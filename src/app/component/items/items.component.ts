@@ -31,9 +31,6 @@ export class ItemsComponent implements OnInit {
       this.favoriteItems.push(film);
     }
 
-    this.LocalStorage.saveData(
-      'favorite',
-      JSON.stringify(this.favoriteItems)
-    );
+    this.LocalStorage.saveData('favorite', JSON.stringify(this.favoriteItems));
   }
 }

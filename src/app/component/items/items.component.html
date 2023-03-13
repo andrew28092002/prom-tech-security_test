@@ -33,7 +33,7 @@
       <app-item
         *ngFor="let item of items"
         [item]="item"
-        (click)="toggleFavoriteItem(item)"
+        (likeClick)="toggleFavoriteItem(item)"
       ></app-item>
     </div>
   </div>
@@ -49,7 +49,7 @@
       <app-item
         *ngFor="let item of favoriteItems"
         [item]="item"
-        (click)="toggleFavoriteItem(item)"
+        (likeClick)="toggleFavoriteItem(item)"
       ></app-item>
     </div>
   </div>

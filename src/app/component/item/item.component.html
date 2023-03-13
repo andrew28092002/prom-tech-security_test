@@ -5,6 +5,7 @@
 >
   <img
     mat-card-image
+    (click)="openDialog()"
     src="{{ './../../../assets/images/' + item.id + '.jpeg' }}"
   />
 
@@ -20,7 +21,13 @@
     </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-icon-button color="" class="like" #button (click)="onClick()">
+    <button
+      mat-icon-button
+      color=""
+      class="like"
+      #button
+      (click)="onClick()"
+    >
       <mat-icon>{{ isFavorite ? "favorite" : "favorite_outline" }}</mat-icon>
     </button>
   </mat-card-actions>
