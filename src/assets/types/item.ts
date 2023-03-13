@@ -3,5 +3,6 @@ export type TItem = {
     name: string,
     year: number,
     description: string,
-    genre: number[]
+    genre: number[],
+    isFavourite?: boolean
 }

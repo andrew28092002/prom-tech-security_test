@@ -30,19 +30,27 @@
     </div>
 
     <div class="content">
-      <app-item *ngFor="let item of items" [item]="item" (click)="toggleFavouriteItem(item)"></app-item>
+      <app-item
+        *ngFor="let item of items"
+        [item]="item"
+        (click)="toggleFavoriteItem(item)"
+      ></app-item>
     </div>
   </div>
 
-  <div class="favourite" *ngIf="favouriteItems">
+  <div class="favorite" *ngIf="favoriteItems">
     <div class="header">
       <div class="title">
         <h1>Самый лучший фильм</h1>
       </div>
-    </div> 
+    </div>
 
     <div class="content">
-      <app-item *ngFor="let item of favouriteItems" [item]="item" (click)="toggleFavouriteItem(item)"></app-item>
+      <app-item
+        *ngFor="let item of favoriteItems"
+        [item]="item"
+        (click)="toggleFavoriteItem(item)"
+      ></app-item>
     </div>
   </div>
 </div>

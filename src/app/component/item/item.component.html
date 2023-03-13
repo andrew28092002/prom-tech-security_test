@@ -1,4 +1,8 @@
-<mat-card *ngIf="item" (mouseenter)="onMouseEnter(button)" (mouseleave)="onMouseLeave(button)">
+<mat-card
+  *ngIf="item"
+  (mouseenter)="onMouseEnter(button)"
+  (mouseleave)="onMouseLeave(button)"
+>
   <img
     mat-card-image
     src="{{ './../../../assets/images/' + item.id + '.jpeg' }}"
@@ -17,7 +21,7 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-icon-button color="" class="like" #button (click)="onClick()">
-      <mat-icon>{{'favorite_outline'}}</mat-icon>
+      <mat-icon>{{ isFavorite ? "favorite" : "favorite_outline" }}</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>

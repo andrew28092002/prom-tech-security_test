@@ -1,17 +1,24 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TItem } from 'src/assets/types/item';
 import { genre } from 'src/assets/data/genre';
 import { MatIconButton } from '@angular/material/button';
+import { LocalService } from 'src/app/local.service';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent {
+export class ItemComponent implements OnInit{
   @Input('item') item: TItem;
-  @Output('toggleFavouriteButton') click = new EventEmitter()
+  @Output('toggleFavoriteButton') click = new EventEmitter();
   genre: Map<number, string> = genre;
+  isFavorite: boolean = false
+
+  constructor(private LocalStorage: LocalService) {}
+  ngOnInit(): void {
+    this.checkIsFavorite()
+  }
 
   reverseGenre() {
     return [...this.item.genre].map((num) => this.genre.get(num)).join(', ');
@@ -26,6 +33,18 @@ export class ItemComponent {
   }
 
   onClick() {
-    this.click.emit(this.item)
+    this.click.emit(this.item);
+  }
+
+  checkIsFavorite() {
+    const dataFromStorage = this.LocalStorage.getData('favorite');
+
+    if (dataFromStorage) {
+      const favoriteItems = JSON.parse(dataFromStorage);
+
+      this.isFavorite = favoriteItems.filter(
+        (item: TItem) => item.id === this.item.id
+      ).length > 0;
+    }
   }
 }

@@ -8,35 +8,32 @@ import { LocalService } from 'src/app/local.service';
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.scss'],
 })
-export class ItemsComponent implements OnInit{
+export class ItemsComponent implements OnInit {
   value = '';
   items: TItem[] = items;
-  favouriteItems: TItem[] = [];
+  favoriteItems: TItem[] = [];
 
   constructor(private LocalStorage: LocalService) {}
   ngOnInit(): void {
-    const dataFromStorage = this.LocalStorage.getData('favourite')
+    const dataFromStorage = this.LocalStorage.getData('favorite');
 
-    if (dataFromStorage){
-      this.favouriteItems = JSON.parse(dataFromStorage)
+    if (dataFromStorage) {
+      this.favoriteItems = JSON.parse(dataFromStorage);
     }
   }
 
-  toggleFavouriteItem(film: TItem) {
-    if (this.favouriteItems.filter((item) => item.id === film.id).length > 0) {
-      this.favouriteItems = this.favouriteItems.filter(
+  toggleFavoriteItem(film: TItem) {
+    if (this.favoriteItems.filter((item) => item.id === film.id).length > 0) {
+      this.favoriteItems = this.favoriteItems.filter(
         (item) => item.id !== film.id
       );
     } else {
-      this.favouriteItems.push(film);
+      this.favoriteItems.push(film);
     }
 
-    console.log(this.favouriteItems)
-
     this.LocalStorage.saveData(
-      'favourite',
-      JSON.stringify(this.favouriteItems)
+      'favorite',
+      JSON.stringify(this.favoriteItems)
     );
   }
-  
 }
