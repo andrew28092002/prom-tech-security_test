@@ -16,11 +16,18 @@ export class ItemComponent {
     return [...this.item.genre].map((num) => this.genre.get(num)).join(', ');
   }
 
+  // onMouseEnter(button: MatIconButton) {
+  //   button._elementRef.nativeElement.style.opacity = '1'
+  // }
+
+  // onMouseLeave(button: MatIconButton) {
+  //   button._elementRef.nativeElement.style.opacity = '0'
+  // }
   onMouseEnter(button: MatIconButton) {
-    button._elementRef.nativeElement.style.opacity = '1'
+    button._elementRef.nativeElement.style.opacity = '1';
   }
 
   onMouseLeave(button: MatIconButton) {
-    button._elementRef.nativeElement.style.opacity = '0'
+    button._elementRef.nativeElement.style.opacity = '0';
   }
 }
