@@ -20,6 +20,9 @@ h1 {
 .content{
   display: flex;
   flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+
   app-item{
     width: 13%;
     margin: 0 10px 15px 0;
