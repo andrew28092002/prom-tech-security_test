@@ -39,7 +39,9 @@ export class ItemComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef = this.dialog.open(ModelDialogComponent);
+    const dialogRef = this.dialog.open(ModelDialogComponent, {
+      data: this.item,
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
