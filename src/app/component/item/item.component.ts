@@ -42,10 +42,27 @@ export class ItemComponent {
           ? this.LocalStorage.saveData('favourite', JSON.stringify(updatedData))
           : this.LocalStorage.removeData('favourite');
       } else {
-        this.LocalStorage.saveData('favourite', JSON.stringify([...parsedData, this.item.id]));
+        this.LocalStorage.saveData(
+          'favourite',
+          JSON.stringify([...parsedData, this.item.id])
+        );
       }
     } else {
       this.LocalStorage.saveData('favourite', JSON.stringify([this.item.id]));
     }
+  }
+
+  isFavourite() {
+    const favouriteFilms = this.LocalStorage.getData('favourite');
+
+    if (favouriteFilms) {
+      const parsedData = JSON.parse(favouriteFilms);
+
+      if (parsedData.includes(this.item.id)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 }
