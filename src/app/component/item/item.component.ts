@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TItem } from 'src/assets/types/item';
 import { genre } from 'src/assets/data/genre';
 import { MatIconButton } from '@angular/material/button';
-import { LocalService } from 'src/app/local.service';
 
 @Component({
   selector: 'app-item',
@@ -11,9 +10,8 @@ import { LocalService } from 'src/app/local.service';
 })
 export class ItemComponent {
   @Input('item') item: TItem;
+  @Output('toggleFavouriteButton') click = new EventEmitter()
   genre: Map<number, string> = genre;
-
-  constructor(private LocalStorage: LocalService) {}
 
   reverseGenre() {
     return [...this.item.genre].map((num) => this.genre.get(num)).join(', ');
@@ -28,41 +26,6 @@ export class ItemComponent {
   }
 
   onClick() {
-    const prevData = this.LocalStorage.getData('favourite');
-
-    if (prevData) {
-      const parsedData = JSON.parse(prevData);
-
-      if (parsedData.includes(this.item.id)) {
-        const updatedData = parsedData.filter(
-          (id: number) => id !== this.item.id
-        );
-
-        updatedData.length > 0
-          ? this.LocalStorage.saveData('favourite', JSON.stringify(updatedData))
-          : this.LocalStorage.removeData('favourite');
-      } else {
-        this.LocalStorage.saveData(
-          'favourite',
-          JSON.stringify([...parsedData, this.item.id])
-        );
-      }
-    } else {
-      this.LocalStorage.saveData('favourite', JSON.stringify([this.item.id]));
-    }
-  }
-
-  isFavourite() {
-    const favouriteFilms = this.LocalStorage.getData('favourite');
-
-    if (favouriteFilms) {
-      const parsedData = JSON.parse(favouriteFilms);
-
-      if (parsedData.includes(this.item.id)) {
-        return true;
-      }
-    }
-
-    return false;
+    this.click.emit(this.item)
   }
 }

@@ -24,7 +24,7 @@ h1 {
   justify-content: flex-start;
 
   app-item{
-    width: 13%;
+    max-width: 13%;
     margin: 0 10px 15px 0;
     flex: 1;
   }
