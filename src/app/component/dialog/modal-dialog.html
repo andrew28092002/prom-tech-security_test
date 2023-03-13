@@ -13,10 +13,10 @@
     <p>{{ item.description }}</p>
 
     <mat-dialog-actions align="end">
-      <button mat-button color="primary">
-        {{isFavorite ? 'Выбрать лучшим фильмом': 'Удалить из лучших фильмов'}}
+      <button mat-button color="{{isFavorite? 'warn' : 'primary'}}" (click)="toggleFavorite()">
+        {{isFavorite ? 'Удалить из лучших фильмов': 'Выбрать лучшим фильмом'}}
       </button>
-      <button mat-button mat-dialog-close color="warn">Закрыть</button>
+      <button mat-button [mat-dialog-close]="isFavorite" color="warn">Закрыть</button>
     </mat-dialog-actions>
   </div>
 </mat-dialog-content>

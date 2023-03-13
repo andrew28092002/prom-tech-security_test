@@ -1,40 +1,33 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TItem } from 'src/assets/types/item';
 import { genre } from 'src/assets/data/genre';
-import { LocalService } from 'src/app/local.service';
 
 @Component({
   selector: 'app-modal-dialog',
   templateUrl: 'modal-dialog.html',
   styleUrls: ['modal-dialog.scss'],
 })
-export class ModelDialogComponent implements OnInit{
+export class ModelDialogComponent {
   isFavorite: boolean;
+  item: TItem;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public item: TItem,
-    private LocalStorage: LocalService
-  ) {}
-  ngOnInit(): void {
-    this.checkIsFavorite()
+  constructor(public dialogRef: MatDialogRef<ModelDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: [TItem, boolean]
+  ) {
+    this.item = data[0]
+    this.isFavorite = data[1]
   }
 
   reverseGenre() {
     return [...this.item.genre].map((num) => genre.get(num)).join(', ');
   }
 
-  checkIsFavorite() {
-    const dataFromStorage = this.LocalStorage.getData('favorite');
-
-    if (dataFromStorage) {
-      const favoriteItems = JSON.parse(dataFromStorage);
-
-      this.isFavorite =
-        favoriteItems.filter((item: TItem) => item.id === this.item.id).length >
-        0;
-    }
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite
   }
 
-  
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

@@ -35,16 +35,21 @@ export class ItemComponent implements OnInit {
   }
 
   onClick() {
-    this.likeClick.emit(this.item);
+    this.LocalStorage.toggleFavoriteItem('favorite', this.item);
+    this.likeClick.emit(this.item)
+    this.checkIsFavorite()
   }
+
 
   openDialog() {
     const dialogRef = this.dialog.open(ModelDialogComponent, {
-      data: this.item,
+      data: [this.item, this.isFavorite],
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      if(result){
+        this.onClick()
+      }
     });
   }
 
