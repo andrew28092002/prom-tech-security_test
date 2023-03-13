@@ -1,4 +1,4 @@
-<mat-card *ngIf="item">
+<mat-card *ngIf="item" (mouseenter)="onMouseEnter(button)" (mouseleave)="onMouseLeave(button)">
   <img
     mat-card-image
     src="{{ './../../../assets/images/' + item.id + '.jpeg' }}"
@@ -9,13 +9,15 @@
       {{ item.name }}
     </h2>
     <p>
-      {{ item.genre.join(", ") }}
+      {{ reverseGenre() }}
     </p>
-    <h4>
+    <p>
       {{ item.year }}
-    </h4>
+    </p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>LIKE</button>
+    <button mat-icon-button color="" class="like" #button>
+      <mat-icon>favorite</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>

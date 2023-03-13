@@ -6,8 +6,20 @@ mat-card {
   justify-content: flex-start;
 }
 
-mat-card-content{
-    padding: 0;
+mat-card-content {
+  padding: 0;
+}
+
+mat-card-actions {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+
+  button{
+    margin-right: 0;
+    opacity: 0;
+  }
 }
 
 img {
@@ -24,6 +36,20 @@ h2 {
   line-height: 16px;
   max-width: 93%;
 
+  color: #1d1838;
+}
+
+p {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
 
   color: #1d1838;
+}
+
+.like{
+  margin-left: 0;
+  margin-right: auto;
 }
