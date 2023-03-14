@@ -34,7 +34,6 @@ export class ItemComponent{
   onClick() {
     this.LocalStorage.toggleFavoriteItem('favorite', this.item);
     this.likeClick.emit(this.item)
-    // this.checkIsFavorite()
   }
 
 

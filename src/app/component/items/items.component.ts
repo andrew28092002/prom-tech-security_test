@@ -1,10 +1,4 @@
-import {
-  Component,
-  DoCheck,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import items from './../../../assets/data/data.json';
 import { TItem } from 'src/assets/types/item';
 import { LocalService } from 'src/app/local.service';
@@ -19,13 +13,19 @@ export class ItemsComponent implements OnInit, DoCheck {
   value = '';
   items: TItem[] = items;
   favoriteItems: TItem[] = [];
-  genre = genre;
+  sortedByGenre: TItem[] = [];
+  sortedFavoriteItemsByGenre: TItem[] = [];
+  sortedBySearch: TItem[] = [];
+  sortedFavoriteItemsBySearch: TItem[] = [];
+  genreDict = genre;
   selectedGenre: string = 'all';
+  search: string = '';
 
   constructor(private LocalStorage: LocalService) {}
 
   ngDoCheck(): void {
-    this.sort();
+    this.sortByGenre();
+    this.sortBySearch();
   }
 
   ngOnInit(): void {
@@ -48,17 +48,82 @@ export class ItemsComponent implements OnInit, DoCheck {
     this.LocalStorage.saveData('favorite', JSON.stringify(this.favoriteItems));
   }
 
-  checkIsFavorite(item: TItem){
-    return this.favoriteItems.filter(favoriteItem => favoriteItem.id === item.id).length > 0
+  checkIsFavorite(item: TItem) {
+    return (
+      this.favoriteItems.filter((favoriteItem) => favoriteItem.id === item.id)
+        .length > 0
+    );
   }
 
-  sort() {
+  sortByGenre() {
     if (this.selectedGenre !== 'all') {
-      const sortedByGenre = items.filter((item) =>
-        item.genre.forEach((genre) => genre === Number(this.selectedGenre))
-      );
+      const sortedByGenre: TItem[] = [];
 
-      console.log(sortedByGenre);
+      this.items.forEach((item) => {
+        const flag = item.genre.some(
+          (genreNum) =>
+            this.genreDict.get(genreNum) ===
+            this.genreDict.get(Number(this.selectedGenre))
+        );
+
+        if (flag) {
+          sortedByGenre.push(item);
+        }
+      });
+
+      this.sortedByGenre = sortedByGenre;
+
+      const sortedFavoriteByGenre: TItem[] = [];
+
+      sortedByGenre.forEach((item) => {
+        const flag = this.favoriteItems.some(
+          (favoriteItem) => favoriteItem.id === item.id
+        );
+
+        if (flag) {
+          sortedFavoriteByGenre.push(item);
+        }
+      });
+
+      this.sortedFavoriteItemsByGenre = sortedFavoriteByGenre;
+    } else {
+      this.sortedByGenre = this.items;
+      this.sortedFavoriteItemsByGenre = this.favoriteItems;
+    }
+  }
+
+  sortBySearch() {
+    if (this.search.trim() !== '') {
+      const sortedBySearch: TItem[] = [];
+
+      this.sortedByGenre.forEach((item) => {
+        const flag = item.name
+          .toLowerCase()
+          .includes(this.search.trim().toLowerCase());
+
+        if (flag) {
+          sortedBySearch.push(item);
+        }
+      });
+
+      this.sortedBySearch = sortedBySearch;
+
+      const sortedFavoriteBySearch: TItem[] = [];
+
+      sortedBySearch.forEach((item) => {
+        const flag = this.sortedFavoriteItemsByGenre.some(
+          (favoriteItem) => favoriteItem.id === item.id
+        );
+
+        if (flag) {
+          sortedFavoriteBySearch.push(item);
+        }
+      });
+
+      this.sortedFavoriteItemsBySearch = sortedFavoriteBySearch;
+    } else {
+      this.sortedBySearch = this.sortedByGenre;
+      this.sortedFavoriteItemsBySearch = this.sortedFavoriteItemsByGenre;
     }
   }
 }

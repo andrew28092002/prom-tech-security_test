@@ -24,13 +24,13 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>Введите название</mat-label>
-          <input matInput type="text" [(ngModel)]="value" />
+          <input matInput type="text" [(ngModel)]="search" />
           <button
-            *ngIf="value"
+            *ngIf="search"
             matSuffix
             mat-icon-button
             aria-label="Clear"
-            (click)="value = ''"
+            (click)="search = ''"
           >
             <mat-icon>close</mat-icon>
           </button>
@@ -40,7 +40,7 @@
 
     <div class="content">
       <app-item
-        *ngFor="let item of items"
+        *ngFor="let item of sortedBySearch"
         [item]="item"
         [isFavorite]="checkIsFavorite(item)"
         (likeClick)="toggleFavoriteItem(item)"
@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <div class="favorite" *ngIf="favoriteItems.length > 0">
+  <div class="favorite" *ngIf="sortedFavoriteItemsBySearch.length > 0">
     <div class="header">
       <div class="title">
         <h1>Самый лучший фильм</h1>
@@ -57,7 +57,7 @@
 
     <div class="content">
       <app-item
-        *ngFor="let item of favoriteItems"
+        *ngFor="let item of sortedFavoriteItemsBySearch"
         [item]="item"
         (likeClick)="toggleFavoriteItem(item)"
         [isFavorite]="true"
