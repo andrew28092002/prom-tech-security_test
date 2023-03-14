@@ -11,6 +11,7 @@ import { genre } from 'src/assets/data/genre';
 export class ModelDialogComponent {
   isFavorite: boolean;
   item: TItem;
+  haveChange: boolean = false
 
   constructor(public dialogRef: MatDialogRef<ModelDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: [TItem, boolean]
@@ -25,6 +26,7 @@ export class ModelDialogComponent {
 
   toggleFavorite() {
     this.isFavorite = !this.isFavorite
+    this.haveChange = !this.haveChange
   }
 
   onNoClick(): void {

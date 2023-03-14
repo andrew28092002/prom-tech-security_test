@@ -11,16 +11,13 @@ import { ModelDialogComponent } from '../dialog/dialog.component';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent{
   @Input() item: TItem;
+  @Input() isFavorite: boolean;
   @Output() likeClick = new EventEmitter();
   genre: Map<number, string> = genre;
-  isFavorite: boolean = false;
 
   constructor(private LocalStorage: LocalService, private dialog: MatDialog) {}
-  ngOnInit(): void {
-    this.checkIsFavorite();
-  }
 
   reverseGenre() {
     return [...this.item.genre].map((num) => this.genre.get(num)).join(', ');
@@ -37,7 +34,7 @@ export class ItemComponent implements OnInit {
   onClick() {
     this.LocalStorage.toggleFavoriteItem('favorite', this.item);
     this.likeClick.emit(this.item)
-    this.checkIsFavorite()
+    // this.checkIsFavorite()
   }
 
 
@@ -53,15 +50,5 @@ export class ItemComponent implements OnInit {
     });
   }
 
-  checkIsFavorite() {
-    const dataFromStorage = this.LocalStorage.getData('favorite');
-
-    if (dataFromStorage) {
-      const favoriteItems = JSON.parse(dataFromStorage);
-
-      this.isFavorite =
-        favoriteItems.filter((item: TItem) => item.id === this.item.id).length >
-        0;
-    }
-  }
+  
 }

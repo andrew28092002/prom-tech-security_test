@@ -16,7 +16,7 @@
       <button mat-button color="{{isFavorite? 'warn' : 'primary'}}" (click)="toggleFavorite()">
         {{isFavorite ? 'Удалить из лучших фильмов': 'Выбрать лучшим фильмом'}}
       </button>
-      <button mat-button [mat-dialog-close]="isFavorite" color="warn">Закрыть</button>
+      <button mat-button [mat-dialog-close]="haveChange" color="warn">Закрыть</button>
     </mat-dialog-actions>
   </div>
 </mat-dialog-content>

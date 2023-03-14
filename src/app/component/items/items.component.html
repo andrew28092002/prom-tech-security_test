@@ -6,11 +6,20 @@
       </div>
       <div class="search">
         <mat-form-field class="select">
-          <mat-label>Choose an option</mat-label>
-          <mat-select>
-            <mat-option value="option1">Option 1</mat-option>
-            <mat-option value="option2">Option 2</mat-option>
-            <mat-option value="option3">Option 3</mat-option>
+          <mat-label>Жанр</mat-label>
+          <mat-select [(value)]="selectedGenre">
+            <mat-option value="all">Все</mat-option>
+            <mat-option value="1">Драма</mat-option>
+            <mat-option value="2">Биография</mat-option>
+            <mat-option value="3">История</mat-option>
+            <mat-option value="4">Фэнтези</mat-option>
+            <mat-option value="5">Приключения</mat-option>
+            <mat-option value="6">Боевик</mat-option>
+            <mat-option value="7">Мультфильм</mat-option>
+            <mat-option value="8">Комедия</mat-option>
+            <mat-option value="9">Триллер</mat-option>
+            <mat-option value="10">Детектив</mat-option>
+            <mat-option value="11">Фантастика</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field>
@@ -33,12 +42,13 @@
       <app-item
         *ngFor="let item of items"
         [item]="item"
+        [isFavorite]="checkIsFavorite(item)"
         (likeClick)="toggleFavoriteItem(item)"
       ></app-item>
     </div>
   </div>
 
-  <div class="favorite" *ngIf="favoriteItems">
+  <div class="favorite" *ngIf="favoriteItems.length > 0">
     <div class="header">
       <div class="title">
         <h1>Самый лучший фильм</h1>
@@ -50,6 +60,7 @@
         *ngFor="let item of favoriteItems"
         [item]="item"
         (likeClick)="toggleFavoriteItem(item)"
+        [isFavorite]="true"
       ></app-item>
     </div>
   </div>
