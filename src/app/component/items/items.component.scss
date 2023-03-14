@@ -38,6 +38,46 @@ h1 {
   }
 }
 
+@media screen and (min-width: 450px) {
+  .content {
+    app-item {
+      max-width: 45%;
+    }
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .content {
+    app-item {
+      max-width: 33%;
+    }
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .content {
+    app-item {
+      max-width: 23%;
+    }
+  }
+}
+
+@media screen and (min-width: 1050px) {
+  .content {
+    app-item {
+      max-width: 19%;
+    }
+  }
+}
+
+@media screen and (min-width: 1250px) {
+  .content {
+    app-item {
+      max-width: 15%;
+    }
+  }
+}
+
 @media screen and (min-width: 1440px) {
   .content {
     app-item {

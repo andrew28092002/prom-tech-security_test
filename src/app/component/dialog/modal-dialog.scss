@@ -1,22 +1,22 @@
 mat-dialog-content {
   display: flex;
   justify-content: space-between;
-  padding: 15px 20px
+  padding: 15px 20px;
 }
 
 .image {
-    margin-right: 20px;
+  margin-right: 20px;
   img {
     border-radius: 5px;
     height: 225px;
   }
 }
 
-.description{
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.description {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 h2 {
@@ -39,4 +39,26 @@ p {
   margin-bottom: 5px;
 
   color: #1d1838;
+}
+
+@media screen and (max-width: 640px) {
+  mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .image {
+    margin: 10px auto;
+    img {
+      border-radius: 5px;
+      height: 300px;
+    }
+  }
+
+  mat-dialog-actions{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
 }
