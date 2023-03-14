@@ -4,11 +4,6 @@
 
 .select {
   margin: 15px 7px 15px 0;
-  border: none;
-
-  mat-label{
-    border-radius: 5px ;
-  }
 }
 
 h1 {
@@ -22,13 +17,13 @@ h1 {
   color: #000000;
 }
 
-.content{
+.content {
   display: flex;
   flex-flow: row wrap;
   align-items: stretch;
   justify-content: flex-start;
 
-  app-item{
+  app-item {
     max-width: 13%;
     margin: 0 10px 15px 0;
     flex: 1;
@@ -36,18 +31,16 @@ h1 {
 }
 
 @media screen and (min-width: 320px) {
-  .content{
-    app-item{
+  .content {
+    app-item {
       max-width: 80%;
     }
   }
 }
 
-
 @media screen and (min-width: 1440px) {
-  .content{
-
-    app-item{
+  .content {
+    app-item {
       max-width: 13%;
     }
   }
