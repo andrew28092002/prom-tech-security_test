@@ -1,27 +1,9 @@
-# PromTech
+# [Тестовое задания на Angular](https://andrew28092002.github.io/prom-tech-security_test/)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.1.
+![изображение](https://user-images.githubusercontent.com/98597980/224986611-41091a6d-33d1-44eb-aaeb-bba7d6714e43.png)
 
-## Development server
+Основа стилизации - Material. При нажатии на изображение фильма открывается модальное окно. В правом нижнем углу карточки фильма находится иконка, при нажатии на которую фильм попадает в категорию "Лучший фильм". В шапке страницы находится select для сортировки фильмов по жанрам, а рядом input для поиска по названию.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Во время выполнения думал о разных способах реализации функции "Лайки", проблема заключалась в том, что у меня две таблицы: "все фильмы" и "лучшие фильмы", где можно поставить лайк, а так же есть модальное окно, где можно сделать фильм "лучшим". Первой мыслью было - добавить в items поле "favorite", но в процессе понял, что задумка может быть и хорошая, но для категории "лучший фильм" все равно нужно создавать отдельный массив с фильмами.   
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Самой главной проблемой для меня оказались лайки, может быть покажется смешно, но на них я потратил почти все время. Изначально я думал о том, что проще сохранять и брать фильмы из localstorage, но чтобы проверить, находится ли фильм в категории "лучший", приходилось лепить громадный "костыль", от чего я решил отказаться, потом я решил прокидывать через props функцию из items, которая уже и определяла бы попадает ли фильм в массив favoriteItems. Уже сделав данную функцию, я совсем забыл, что не учел модальное окно! С ним тоже была проблема. В поле data в модальное окно я пытался прокинуть методы для лайков, но понял, что идея "так себе". Потом решил, что в поле data я буду прокидывать только информацию о посте и является ли он на данный момент "лучшим", а если в модальном окне эту информацию поменяют, то flag изменится на true(т.е. произошли изменения), и как только модальное окно закроется, то выполнятся нужные методы и произойдут изменения
