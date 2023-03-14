@@ -29,3 +29,21 @@ h1 {
     flex: 1;
   }
 }
+
+@media screen and (min-width: 320px) {
+  .content{
+    app-item{
+      max-width: 80%;
+    }
+  }
+}
+
+
+@media screen and (min-width: 1440px) {
+  .content{
+
+    app-item{
+      max-width: 13%;
+    }
+  }
+}
