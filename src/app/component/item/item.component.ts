@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TItem } from 'src/assets/types/item';
-import { genre } from 'src/assets/data/genre';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Item } from 'src/assets/types/item';
+import { genres } from 'src/assets/data/genre';
 import { MatIconButton } from '@angular/material/button';
-import { LocalService } from 'src/app/local.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModelDialogComponent } from '../dialog/dialog.component';
 
@@ -11,16 +10,18 @@ import { ModelDialogComponent } from '../dialog/dialog.component';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent{
-  @Input() item: TItem;
-  @Input() isFavorite: boolean;
-  @Output() likeClick = new EventEmitter();
-  genre: Map<number, string> = genre;
+export class ItemComponent{ 
+  @Input() item: Item;
+  @Output() addToFavorite: EventEmitter<Item> = new EventEmitter<Item>()
 
-  constructor(private LocalStorage: LocalService, private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog) {}
+
+  get isFavorite(){
+    return this.item.isFavorite
+  }
 
   reverseGenre() {
-    return [...this.item.genre].map((num) => this.genre.get(num)).join(', ');
+    return [...this.item.genre].map((num) => genres[num]).join(', ');
   }
 
   onMouseEnter(button: MatIconButton) {
@@ -32,14 +33,13 @@ export class ItemComponent{
   }
 
   onClick() {
-    this.LocalStorage.toggleFavoriteItem('favorite', this.item);
-    this.likeClick.emit(this.item)
+    this.addToFavorite.emit(this.item)
   }
 
 
   openDialog() {
     const dialogRef = this.dialog.open(ModelDialogComponent, {
-      data: [this.item, this.isFavorite],
+      data: [this.item, this.item.isFavorite],
     });
 
     dialogRef.afterClosed().subscribe((result) => {

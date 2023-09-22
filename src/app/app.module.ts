@@ -19,12 +19,13 @@ import {
   ModelDialogComponent,
 } from './component/dialog/dialog.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     ItemsComponent,
     ItemComponent,
-    ModelDialogComponent
+    ModelDialogComponent,
   ],
   imports: [
     BrowserModule,

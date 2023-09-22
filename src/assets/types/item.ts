@@ -1,8 +1,8 @@
-export type TItem = {
+export type Item = {
     id: number,
     name: string,
     year: number,
     description: string,
     genre: number[],
-    isFavourite?: boolean
+    isFavorite?: boolean
 }

@@ -7,24 +7,22 @@
       <div class="search">
         <mat-form-field class="select">
           <mat-label>Жанр</mat-label>
-          <mat-select [(value)]="selectedGenre">
-            <mat-option value="all">Все</mat-option>
-            <mat-option value="1">Драма</mat-option>
-            <mat-option value="2">Биография</mat-option>
-            <mat-option value="3">История</mat-option>
-            <mat-option value="4">Фэнтези</mat-option>
-            <mat-option value="5">Приключения</mat-option>
-            <mat-option value="6">Боевик</mat-option>
-            <mat-option value="7">Мультфильм</mat-option>
-            <mat-option value="8">Комедия</mat-option>
-            <mat-option value="9">Триллер</mat-option>
-            <mat-option value="10">Детектив</mat-option>
-            <mat-option value="11">Фантастика</mat-option>
+          <mat-select (selectionChange)="sortByGenre($event)">
+            <mat-option
+              *ngFor="let genre of genres; let indx = index"
+              [value]="indx"
+              >{{ genre }}</mat-option
+            >
           </mat-select>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Введите название</mat-label>
-          <input matInput type="text" [(ngModel)]="search" />
+          <input
+            matInput
+            type="text"
+            (change)="sortBySearch($event)"
+            [(ngModel)]="search"
+          />
           <button
             *ngIf="search"
             matSuffix
@@ -39,16 +37,11 @@
     </div>
 
     <div class="content">
-      <app-item
-        *ngFor="let item of sortedBySearch"
-        [item]="item"
-        [isFavorite]="checkIsFavorite(item)"
-        (likeClick)="toggleFavoriteItem(item)"
-      ></app-item>
+      <app-item *ngFor="let item of items" [item]="item"></app-item>
     </div>
   </div>
 
-  <div class="favorite" *ngIf="sortedFavoriteItemsBySearch.length > 0">
+  <div *ngIf="favoriteItems.length" class="favorite">
     <div class="header">
       <div class="title">
         <h1>Самый лучший фильм</h1>
@@ -57,10 +50,9 @@
 
     <div class="content">
       <app-item
-        *ngFor="let item of sortedFavoriteItemsBySearch"
+        *ngFor="let item of favoriteItems"
         [item]="item"
-        (likeClick)="toggleFavoriteItem(item)"
-        [isFavorite]="true"
+        (addToFavorite)="addToFavorite(item)"
       ></app-item>
     </div>
   </div>
